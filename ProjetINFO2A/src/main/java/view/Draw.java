@@ -17,6 +17,7 @@ public class Draw {
     public void drawAt(int x, int y, ColoredChar coloredChar){
         terminal.puts(InfoCmp.Capability.cursor_address, y,x*2); //changer la couleur en fonction de la case
         terminal.writer().print(coloredChar);
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 
     public void cleanAt(int x, int y){
@@ -27,6 +28,7 @@ public class Draw {
             coloredChar = new ColoredChar(BLOCK, Color.WHITE);
         }
         terminal.writer().print(coloredChar);
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 
     public void drawBackground(GamePanel gamePanel){

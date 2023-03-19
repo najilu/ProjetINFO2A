@@ -7,7 +7,7 @@ public interface Viewable
 
     void update();
 
-    void LaunchListener();
+    char LaunchListener();
 
     void verif();
 

@@ -1,5 +1,6 @@
 package controller;
 
+import model.InputManager;
 import model.Player;
 import model.Sprite;
 import view.Color;
@@ -21,12 +22,15 @@ public class Controller
 
     private Viewable view;
 
+    private InputManager inputManager;
+
     public Controller(Viewable view)
     {
         player = new Player(10,10,15,new Sprite('P', Color.CYAN), 1);
         this.gameState = GameState.GameInitialisation;
         this.view = view;
         view.setController(this);
+        inputManager = new InputManager(this);
     }
 
     public void startGame(){
@@ -47,16 +51,31 @@ public class Controller
     public void run()
     {
         switch (gameState){
-            case GameInitialisation -> view.InitGamePanel(); //modifier quelque appels a la logique
-            case Update -> view.update();
-            case PlayerAction -> view.LaunchListener();
-            case Checking -> view.verif();
+            case GameInitialisation -> {
+                view.InitGamePanel(); //modifier quelque appels a la logique
+                nextStep();
+            }
+            case Update -> {
+                view.update();
+                nextStep();
+            }
+            case PlayerAction -> {
+                inputManager.move(view.LaunchListener());
+                nextStep();
+            }
+            case Checking -> {
+                view.verif();
+                nextStep();
+            }
             case DommagePhase -> {
                 player.setHP(player.getHP()-1);
                 nextStep();
             }
         }
     }
+
+
+    //region setter/getters
 
     public int getX_player(){
         return player.getX();
@@ -92,5 +111,6 @@ public class Controller
         return player.getSprite();
     }
 
+    //endregion
 
 }
