@@ -23,7 +23,7 @@ public class Controller
 
     public Controller(Viewable view)
     {
-        player = new Player(10,10,15,new Sprite('P', Color.CYAN), 2);
+        player = new Player(10,10,15,new Sprite('P', Color.CYAN), 1);
         this.gameState = GameState.GameInitialisation;
         this.view = view;
         view.setController(this);
@@ -47,7 +47,7 @@ public class Controller
     public void run()
     {
         switch (gameState){
-            case GameInitialisation -> view.InitGamePanel();
+            case GameInitialisation -> view.InitGamePanel(); //modifier quelque appels a la logique
             case Update -> view.update();
             case PlayerAction -> view.LaunchListener();
             case Checking -> view.verif();

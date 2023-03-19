@@ -4,6 +4,7 @@ import controller.Controller;
 import model.InputManager;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.InfoCmp;
 
 import java.io.IOException;
 
@@ -68,6 +69,7 @@ public class GamePanel implements Viewable {
 
     @Override
     public void InitGamePanel() {
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
         draw.drawBackground(this);
         controller.nextStep();
     }

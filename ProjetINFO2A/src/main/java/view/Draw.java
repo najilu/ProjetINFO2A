@@ -15,16 +15,16 @@ public class Draw {
     }
 
     public void drawAt(int x, int y, ColoredChar coloredChar){
-        terminal.puts(InfoCmp.Capability.cursor_address, y,x);
+        terminal.puts(InfoCmp.Capability.cursor_address, y,x*2); //changer la couleur en fonction de la case
         terminal.writer().print(coloredChar);
     }
 
     public void cleanAt(int x, int y){
-        terminal.puts(InfoCmp.Capability.cursor_address, y,x);
+        terminal.puts(InfoCmp.Capability.cursor_address, y,x*2);
         ColoredChar coloredChar = null;
-        if ((y%2 == 0 && x%2 ==0) || (y%2 == 1 && x%2 ==1)) coloredChar = new ColoredChar(BLOCK, Color.WHITE);
+        if ((y%2 == 0 && x%2 ==0) || (y%2 == 1 && x%2 ==1)) coloredChar = new ColoredChar(BLOCK, Color.BLACK);
         else{
-            coloredChar = new ColoredChar(BLOCK, Color.BLACK);
+            coloredChar = new ColoredChar(BLOCK, Color.WHITE);
         }
         terminal.writer().print(coloredChar);
     }
