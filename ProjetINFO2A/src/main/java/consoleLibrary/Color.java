@@ -1,4 +1,4 @@
-package view;
+package consoleLibrary;
 
 public enum Color
 {
@@ -10,7 +10,8 @@ public enum Color
     BLUE("\u001B[34m"),
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
-    WHITE("\u001B[37m");
+    WHITE("\u001B[37m"),
+    GREY("\u001b[30;1m");
 
     final String ASCIIcode;
 

@@ -1,14 +1,17 @@
 package view;
 
+import consoleLibrary.Draw;
+import consoleLibrary.KeyListenerConsole;
 import controller.Controller;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
 import java.io.IOException;
 
-public class GamePanel implements Viewable {
-    private final int rowMax;
-    private final int colMax;
+public class GamePanel implements IViewable
+{
+    private int rowMax;
+    private int colMax;
     private final Terminal terminal;
     private Controller controller;
     private final Draw draw;
@@ -36,10 +39,16 @@ public class GamePanel implements Viewable {
         keyListener = new KeyListenerConsole(terminal);
     }
 
+    public GamePanel(){
+        this(0,0);
+    }
+
     @Override
     public void update() {
-        draw.cleanAt(controller.getOldX_player(), controller.getOldY_player());
-        draw.drawAt(controller.getX_player(), controller.getY_player(), controller.getSprite().getColoredChar());
+        if(controller.getOldX_player() != controller.getX_player() || controller.getOldY_player() != controller.getY_player()){
+            draw.drawAt(controller.getOldX_player(), controller.getOldY_player(), controller.getMap().getEntity(controller.getX_player(), controller.getY_player()).getConsoleSprite().getColoredChar());
+            draw.drawAt(controller.getX_player(), controller.getY_player(), controller.getSprite().getColoredChar());
+        }
     }
 
     @Override
@@ -48,7 +57,8 @@ public class GamePanel implements Viewable {
     }
 
     @Override
-    public void verif() {
+    public void showHP() {
+        draw.showMessage(this, "x :" + controller.getX_player() + " y :" + controller.getY_player() + " HP : " + controller.getHP_player());
     }
 
     @Override
@@ -58,7 +68,43 @@ public class GamePanel implements Viewable {
 
     @Override
     public void InitGamePanel() {
+        rowMax = controller.getRowMax();
+        colMax = controller.getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
-        draw.drawBackground(this);
+        draw.drawMap(this, controller.getMap());
     }
+
+    public void showWin(){
+        draw.showASCII("""
+
+                 __     __                    _            _____  _____  __          _______    _\s
+                 \\ \\   / /                   (_)          / ____|/ ____| \\ \\        / /  __ \\  | |
+                  \\ \\_/ /__  _   _  __      ___ _ __     | |  __| |  __   \\ \\  /\\  / /| |__) | | |
+                   \\   / _ \\| | | | \\ \\ /\\ / / | '_ \\    | | |_ | | |_ |   \\ \\/  \\/ / |  ___/  | |
+                    | | (_) | |_| |  \\ V  V /| | | | |_  | |__| | |__| |    \\  /\\  /  | |      |_|
+                    |_|\\___/ \\__,_|   \\_/\\_/ |_|_| |_( )  \\_____|\\_____|     \\/  \\/   |_|      (_)
+                                                     |/                                          \s
+                                                                                                 \s
+                """);
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
+    }
+
+    public void showLose(){
+        draw.showASCII(
+                """
+
+                         __     __           _                    _ _   _                     _   _\s
+                         \\ \\   / /          | |                  (_) | ( )                   | | | |
+                          \\ \\_/ /__  _   _  | | ___  ___  ___     _| |_|/ ___   ___  __ _  __| | | |
+                           \\   / _ \\| | | | | |/ _ \\/ __|/ _ \\   | | __| / __| / __|/ _` |/ _` | | |
+                            | | (_) | |_| | | | (_) \\__ \\  __/_  | | |_  \\__ \\ \\__ \\ (_| | (_| | |_|
+                            |_|\\___/ \\__,_| |_|\\___/|___/\\___( ) |_|\\__| |___/ |___/\\__,_|\\__,_| (_)
+                                                             |/                                    \s
+                                                                                                   \s
+                        """
+        );
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
+    }
+
+
 }

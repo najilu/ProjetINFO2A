@@ -1,13 +1,22 @@
 package model;
 
-public class Player {
+public class Player extends Entity{
     private int x;
     private int oldX;
     private int y;
     private int oldY;
     private int HP;
-    private Sprite sprite;
     private int speed;
+    private int stones;
+    private boolean win;
+
+    public boolean isWin(){
+        return win;
+    }
+
+    public void setWin(boolean value){
+        win = value;
+    }
 
     public int getX() {
         return x;
@@ -31,14 +40,6 @@ public class Player {
 
     public void setHP(int HP) {
         this.HP = HP;
-    }
-
-    public Sprite getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
     }
 
     public int getSpeed() {
@@ -65,13 +66,35 @@ public class Player {
         this.oldY = oldY;
     }
 
-    public Player(int x, int y, int HP, Sprite sprite, int speed) {
+    public int getStones()
+    {
+        return stones;
+    }
+
+    public void setStones(int stones)
+    {
+        this.stones = stones;
+    }
+
+
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, Sprite3D sprite3D , int speed) {
+        super(sprite3D, consoleSprite);
         this.x = x;
-        this.oldY = y;
-        this.oldX = x;
+        this.oldY = -1;
+        this.oldX = -1;
         this.y = y;
         this.HP = HP;
-        this.sprite = sprite;
+        this.speed = speed;
+    }
+
+
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, int speed) {
+        super(new Sprite3D(), consoleSprite);
+        this.x = x;
+        this.oldY = -1;
+        this.oldX = -1;
+        this.y = y;
+        this.HP = HP;
         this.speed = speed;
     }
 }

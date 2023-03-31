@@ -1,15 +1,13 @@
 package controller;
 
-import model.InputManager;
-import model.Player;
-import model.Sprite;
-import view.Color;
-import view.Viewable;
+import model.*;
+import consoleLibrary.Color;
+import view.IViewable;
 
 public class Controller
 {
     public enum GameState{
-        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase
+        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, LosePhase
     }
 
     //element du model pas encore pret
@@ -20,13 +18,17 @@ public class Controller
         return gameState;
     }
 
-    private Viewable view;
+    private IViewable view;
 
     private InputManager inputManager;
 
-    public Controller(Viewable view)
+    private Map map;
+
+
+    public Controller(IViewable view, int rowMax, int colMax)
     {
-        player = new Player(10,10,15,new Sprite('P', Color.CYAN), 1);
+        player = new Player(0,0,3,new ConsoleSprite(' ', '♜', Color.BLACK), 1);
+        map = new Map(rowMax,colMax, player);
         this.gameState = GameState.GameInitialisation;
         this.view = view;
         view.setController(this);
@@ -44,6 +46,7 @@ public class Controller
             case Update -> gameState= GameState.PlayerAction;
             case PlayerAction -> gameState= GameState.Checking;
             case Checking -> gameState= GameState.DommagePhase;
+            case WinPhase, LosePhase -> run();
         }
         run();
     }
@@ -52,7 +55,7 @@ public class Controller
     {
         switch (gameState){
             case GameInitialisation -> {
-                view.InitGamePanel(); //modifier quelque appels a la logique
+                view.InitGamePanel();
                 nextStep();
             }
             case Update -> {
@@ -61,15 +64,24 @@ public class Controller
             }
             case PlayerAction -> {
                 inputManager.move(view.LaunchListener());
+                // s'occuper du lancer de pierre
                 nextStep();
             }
             case Checking -> {
-                view.verif();
+                GameEvaluator.CheckNewCase(this.player, this.map);
+                if(player.isWin()) gameState = GameState.WinPhase;
                 nextStep();
             }
             case DommagePhase -> {
-                player.setHP(player.getHP()-1);
+                view.showHP();
+                if(player.getHP() == 0) gameState = GameState.LosePhase;
                 nextStep();
+            }
+            case WinPhase -> {
+                view.showWin();
+            }
+            case LosePhase -> {
+                view.showLose();
             }
         }
     }
@@ -77,6 +89,7 @@ public class Controller
 
     //region setter/getters
 
+    public int getHP_player() {return player.getHP();}
     public int getX_player(){
         return player.getX();
     }
@@ -107,9 +120,29 @@ public class Controller
         player.setOldY(player.getY());
     }
 
-    public Sprite getSprite(){
-        return player.getSprite();
+    public ConsoleSprite getSprite(){
+        return player.getConsoleSprite();
     }
+
+    public Map getMap(){
+        return map;
+    }
+
+    public int getRowMax(){
+        return map.getRowMax();
+    }
+
+    public int getColMax(){
+        return map.getColMax();
+    }
+
+    public int getPlayerSpeed(){
+        return player.getSpeed();
+    }
+
+    //endregion
+
+    //region test
 
     //endregion
 

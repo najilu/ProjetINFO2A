@@ -1,8 +1,9 @@
-package view;
+package consoleLibrary;
 
 public class ColoredChar
 {
     private char c;
+    private char optionnalChar;
     private Color color;
 
     public ColoredChar(char c, Color color)
@@ -11,10 +12,16 @@ public class ColoredChar
         this.color = color;
     }
 
+    public ColoredChar(char c, char c2, Color color){
+        this(c, color);
+        optionnalChar = c2;
+
+    }
+
+
     public ColoredChar(char c)
     {
-        this.c = c;
-        this.color = Color.RESET;
+        this(c, Color.RESET);
     }
 
     public char getC()
@@ -25,6 +32,6 @@ public class ColoredChar
     @Override
     public String toString()
     {
-        return color + "" +c+c;
+        return color + "" +c+ ((optionnalChar == 0) ? c : optionnalChar);
     }
 }

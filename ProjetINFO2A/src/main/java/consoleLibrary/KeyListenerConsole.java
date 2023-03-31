@@ -1,4 +1,4 @@
-package view;
+package consoleLibrary;
 
 import org.jline.terminal.Terminal;
 

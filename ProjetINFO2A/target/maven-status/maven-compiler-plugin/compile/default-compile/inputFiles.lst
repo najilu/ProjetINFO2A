@@ -1,12 +1,19 @@
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\controller\Controller.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\model\InputManager.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Paint.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\GamePanel.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Player.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\GameLauncher.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Viewable.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Draw.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Sprite.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Color.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\ColoredChar.java
-E:\Documents\Programation\Java\ProjetINFO2A\ProjetINFO2A\src\main\java\view\KeyListenerConsole.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\GameEvaluator.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\InputManager.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Color.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\PlayerTest.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\StoneHeap.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Entity.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Viewable.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Map.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\controller\Controller.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Sprite.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\Draw.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\KeyListenerConsole.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\GamePanel.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\ColoredChar.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Player.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\BigStone.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Bombe.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\NormalCase.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\GameLauncher.java

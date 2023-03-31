@@ -2,16 +2,20 @@ package view;
 
 import controller.Controller;
 
-public interface Viewable
+public interface IViewable
 {
 
     void update();
 
     char LaunchListener();
 
-    void verif();
+    void showHP();
 
     void setController(Controller controller);
 
     void InitGamePanel();
+
+    void showWin();
+
+    void showLose();
 }

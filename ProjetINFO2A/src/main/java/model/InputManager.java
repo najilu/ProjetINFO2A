@@ -14,17 +14,24 @@ public class InputManager {
         controller.setXOld_Player();
         switch (input){
             case 'z' -> {
-                controller.setY_player(-1);
+                if(canMove(controller.getX_player(), controller.getY_player()-controller.getPlayerSpeed()))controller.setY_player(-1);
             }
             case 'q' -> {
-                controller.setX_player(-1);
+                if(canMove(controller.getX_player()-controller.getPlayerSpeed(), controller.getY_player()))controller.setX_player(-1);
             }
             case 'd' -> {
-                controller.setX_player(1);
+                if(canMove(controller.getX_player()+controller.getPlayerSpeed(), controller.getY_player()))controller.setX_player(1);
             }
             case 's' -> {
-                controller.setY_player(1);
+                if(canMove(controller.getX_player(), controller.getY_player()+controller.getPlayerSpeed()))controller.setY_player(1);
             }
         }
+    }
+
+    public boolean canMove(int newX, int newY){
+        if(newX < controller.getColMax() && newX >= 0 && newY < controller.getRowMax() && newY >= 0){
+            return !(controller.getMap().getEntity(newX, newY) instanceof BigStone);
+        }
+        return false;
     }
 }
