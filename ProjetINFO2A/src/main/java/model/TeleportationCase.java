@@ -16,10 +16,10 @@ public class TeleportationCase extends Entity
         this.targetRow = targetY;
     }
 
-    public TeleportationCase(int targetCol, int targetY, ConsoleSprite consoleSprite)
+    public TeleportationCase(int targetCol, int targetRow, ConsoleSprite consoleSprite)
     {
         super(new Sprite3D(), consoleSprite);
         this.targetCol = targetCol;
-        this.targetRow = targetY;
+        this.targetRow = targetRow;
     }
 }

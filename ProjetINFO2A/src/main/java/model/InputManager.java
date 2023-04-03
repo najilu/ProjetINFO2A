@@ -10,28 +10,37 @@ public class InputManager {
     }
 
     public void move(char input){
-        controller.setYOld_Player();
-        controller.setXOld_Player();
+        Player player = controller.getPlayer();
+        controller.getPlayer().setOldX(controller.getPlayer().getX());
+        controller.getPlayer().setOldY(controller.getPlayer().getY());
         switch (input){
             case 'z' -> {
-                if(canMove(controller.getX_player(), controller.getY_player()-controller.getPlayerSpeed()))controller.setY_player(-1);
+                if(canMove(player.getX(), player.getY()-player.getSpeed()))player.setY(player.getY()-1);
             }
             case 'q' -> {
-                if(canMove(controller.getX_player()-controller.getPlayerSpeed(), controller.getY_player()))controller.setX_player(-1);
+                if(canMove(player.getX()-player.getSpeed(), player.getY()))player.setX(player.getX()-1);
             }
             case 'd' -> {
-                if(canMove(controller.getX_player()+controller.getPlayerSpeed(), controller.getY_player()))controller.setX_player(1);
+                if(canMove(player.getX()+player.getSpeed(), player.getY()))player.setX(player.getX()+1);
             }
             case 's' -> {
-                if(canMove(controller.getX_player(), controller.getY_player()+controller.getPlayerSpeed()))controller.setY_player(1);
+                if(canMove(player.getX(), player.getY()+player.getSpeed()))player.setY(player.getY()+1);
             }
         }
     }
 
-    public boolean canMove(int newX, int newY){
-        if(newX < controller.getColMax() && newX >= 0 && newY < controller.getRowMax() && newY >= 0){
+    private boolean canMove(int newX, int newY){
+        if(newX < controller.getMap().getColMax() && newX >= 0 && newY < controller.getMap().getRowMax() && newY >= 0){
             return !(controller.getMap().getEntity(newX, newY) instanceof BigStone);
         }
         return false;
+    }
+
+    public void teleportePlayer(){
+        Player player = controller.getPlayer();
+        player.setOldX(player.getX());
+        player.setOldY(player.getY());
+        player.setX(player.getCurrentTeleportation().getTarget()[0]);
+        player.setY(player.getCurrentTeleportation().getTarget()[1]);
     }
 }

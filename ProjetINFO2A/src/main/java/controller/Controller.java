@@ -7,7 +7,7 @@ import view.IViewable;
 public class Controller
 {
     public enum GameState{
-        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, LosePhase
+        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, TeleportationInProgress, LosePhase
     }
 
     //element du model pas encore pret
@@ -42,7 +42,7 @@ public class Controller
     public void nextStep()
     {
         switch (gameState){
-            case GameInitialisation, DommagePhase -> gameState = GameState.Update;
+            case GameInitialisation, DommagePhase, TeleportationInProgress -> gameState = GameState.Update;
             case Update -> gameState= GameState.PlayerAction;
             case PlayerAction -> gameState= GameState.Checking;
             case Checking -> gameState= GameState.DommagePhase;
@@ -60,6 +60,11 @@ public class Controller
             }
             case Update -> {
                 view.update();
+                if(player.isTeleported())  {
+                    gameState = GameState.TeleportationInProgress;
+                    inputManager.teleportePlayer();
+                    player.setTeleported(false);
+                }
                 nextStep();
             }
             case PlayerAction -> {
@@ -88,62 +93,20 @@ public class Controller
 
 
     //region setter/getters
-
-    public int getHP_player() {return player.getHP();}
-    public int getX_player(){
-        return player.getX();
-    }
-    public int getOldX_player(){
-        return player.getOldX();
-    }
-    public int getY_player(){
-        return player.getY();
-    }
-
-    public int getOldY_player(){
-        return player.getOldY();
-    }
-
-    public void setX_player(int value){
-        player.setX(player.getX() + value * player.getSpeed());
-    }
-
-    public void setXOld_Player(){
-        player.setOldX(player.getX());
-    }
-
-    public void setY_player(int value){
-        player.setY(player.getY() + value * player.getSpeed());
-    }
-
-    public void setYOld_Player(){
-        player.setOldY(player.getY());
-    }
-
-    public ConsoleSprite getSprite(){
-        return player.getConsoleSprite();
+    public Player getPlayer(){
+        return player;
     }
 
     public Map getMap(){
         return map;
     }
 
-    public int getRowMax(){
-        return map.getRowMax();
-    }
-
-    public int getColMax(){
-        return map.getColMax();
-    }
-
-    public int getPlayerSpeed(){
-        return player.getSpeed();
-    }
-
     //endregion
 
-    //region test
-
+    //region afaire
+    //ajouter le lancer des pierres
+    //ajouter le poisson sampling
+    //ajouter les menus contextuelles
     //endregion
 
 }

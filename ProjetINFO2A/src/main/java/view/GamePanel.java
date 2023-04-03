@@ -3,6 +3,7 @@ package view;
 import consoleLibrary.Draw;
 import consoleLibrary.KeyListenerConsole;
 import controller.Controller;
+import model.Player;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
@@ -45,9 +46,13 @@ public class GamePanel implements IViewable
 
     @Override
     public void update() {
-        if(controller.getOldX_player() != controller.getX_player() || controller.getOldY_player() != controller.getY_player()){
-            draw.drawAt(controller.getOldX_player(), controller.getOldY_player(), controller.getMap().getEntity(controller.getX_player(), controller.getY_player()).getConsoleSprite().getColoredChar());
-            draw.drawAt(controller.getX_player(), controller.getY_player(), controller.getSprite().getColoredChar());
+        Player player = controller.getPlayer();
+        if((player.getOldX() != player.getX() || player.getOldY() != player.getY()) && player.getOldX() >= 0 && player.getOldY() >= 0){
+            draw.drawAt(player.getOldX(), player.getOldY(), controller.getMap().getEntity(player.getOldX(), player.getOldY()).getConsoleSprite().getColoredChar());
+            draw.drawAt(player.getX(), player.getY(), player.getConsoleSprite().getColoredChar());
+        }
+        else if((player.getOldX() != player.getX() || player.getOldY() != player.getY())){
+            draw.drawAt(player.getX(), player.getY(), player.getConsoleSprite().getColoredChar());
         }
     }
 
@@ -58,7 +63,7 @@ public class GamePanel implements IViewable
 
     @Override
     public void showHP() {
-        draw.showMessage(this, "x :" + controller.getX_player() + " y :" + controller.getY_player() + " HP : " + controller.getHP_player());
+        draw.showMessage(this, "x :" + controller.getPlayer().getX() + " y :" + controller.getPlayer().getY() + " HP : " + controller.getPlayer().getHP());
     }
 
     @Override
@@ -68,8 +73,8 @@ public class GamePanel implements IViewable
 
     @Override
     public void InitGamePanel() {
-        rowMax = controller.getRowMax();
-        colMax = controller.getColMax();
+        rowMax = controller.getMap().getRowMax();
+        colMax = controller.getMap().getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
         draw.drawMap(this, controller.getMap());
     }

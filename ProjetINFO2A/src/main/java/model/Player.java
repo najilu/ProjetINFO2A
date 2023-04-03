@@ -9,12 +9,30 @@ public class Player extends Entity{
     private int speed;
     private int stones;
     private boolean win;
+    private boolean teleported;
+    private TeleportationCase currentTeleportation;
+
+    public TeleportationCase getCurrentTeleportation(){
+        return currentTeleportation;
+    }
+
+    public void setCurrentTeleportation(TeleportationCase value){
+        currentTeleportation = value;
+    }
+
+    public boolean isTeleported(){
+        return teleported;
+    }
+
+    public void setTeleported(boolean value){
+        teleported = value;
+    }
 
     public boolean isWin(){
         return win;
     }
 
-    public void setWin(boolean value){
+    protected void setWin(boolean value){
         win = value;
     }
 
@@ -22,7 +40,7 @@ public class Player extends Entity{
         return x;
     }
 
-    public void setX(int x) {
+    protected void setX(int x) {
         this.x = x;
     }
 
@@ -30,7 +48,7 @@ public class Player extends Entity{
         return y;
     }
 
-    public void setY(int y) {
+    protected void setY(int y) {
         this.y = y;
     }
 
@@ -38,7 +56,7 @@ public class Player extends Entity{
         return HP;
     }
 
-    public void setHP(int HP) {
+    protected void setHP(int HP) {
         this.HP = HP;
     }
 
@@ -46,7 +64,7 @@ public class Player extends Entity{
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    protected void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -54,7 +72,7 @@ public class Player extends Entity{
         return oldX;
     }
 
-    public void setOldX(int oldX) {
+    protected void setOldX(int oldX) {
         this.oldX = oldX;
     }
 
@@ -62,7 +80,7 @@ public class Player extends Entity{
         return oldY;
     }
 
-    public void setOldY(int oldY) {
+    protected void setOldY(int oldY) {
         this.oldY = oldY;
     }
 

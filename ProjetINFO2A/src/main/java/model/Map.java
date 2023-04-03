@@ -58,7 +58,8 @@ public class Map {
                         mapEntity[rowIndex][colIndex] = new Bombe(ConsoleSprites.BOMBECASE.getValue());
                     }
                     else if(noise>0.35 && noise < 0.36){
-                        mapEntity[rowIndex][colIndex] = new TeleportationCase(random.nextInt(-1, colMax-1), random.nextInt(-1, rowMax-1), ConsoleSprites.TELEPORTATIONCASE.getValue());
+                        int[] coordonates= getRandomNormalCase(mapEntity);
+                        mapEntity[rowIndex][colIndex] = new TeleportationCase(coordonates[0], coordonates[1], ConsoleSprites.TELEPORTATIONCASE.getValue());
                     }
                     else{
                         mapEntity[rowIndex][colIndex] = new NormalCase(ConsoleSprites.NORMALCASE.getValue());
@@ -72,6 +73,20 @@ public class Map {
                 }
             }
         }
+    }
+
+    private int[] getRandomNormalCase(Entity[][] entityVector){
+        boolean isFined = false;
+        Random random = new Random();
+        while (!isFined){
+            int y = random.nextInt(0, entityVector.length);
+            int x = random.nextInt(0, entityVector[y].length);
+            Entity caseChosen = entityVector[y][x];
+            if(caseChosen instanceof NormalCase && !((NormalCase) caseChosen).isVictoryCase()){
+                return new int[]{x,y};
+            }
+        }
+        return new int[0];
     }
 
     public Entity getEntity(int colIndex, int rowIndex) {
