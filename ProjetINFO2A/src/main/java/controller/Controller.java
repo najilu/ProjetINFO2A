@@ -7,7 +7,8 @@ import view.IViewable;
 public class Controller
 {
     public enum GameState{
-        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, TeleportationInProgress, LosePhase
+        GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, TeleportationInProgress, LosePhase,
+        StoneLaunch;
     }
 
     //element du model pas encore pret
@@ -68,8 +69,9 @@ public class Controller
                 nextStep();
             }
             case PlayerAction -> {
-                inputManager.move(view.LaunchListener());
+                inputManager.inputRead(view.LaunchListener());
                 // s'occuper du lancer de pierre
+                if(player.isStoneLaunched()) gameState = GameState.StoneLaunch;//go continuer ca demain
                 nextStep();
             }
             case Checking -> {

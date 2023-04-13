@@ -9,7 +9,7 @@ public class InputManager {
         this.controller = controller;
     }
 
-    public void move(char input){
+    public void inputRead(char input){
         Player player = controller.getPlayer();
         controller.getPlayer().setOldX(controller.getPlayer().getX());
         controller.getPlayer().setOldY(controller.getPlayer().getY());
@@ -25,6 +25,9 @@ public class InputManager {
             }
             case 's' -> {
                 if(canMove(player.getX(), player.getY()+player.getSpeed()))player.setY(player.getY()+1);
+            }
+            case 'a' -> {
+                player.setStoneLaunched(true);
             }
         }
     }

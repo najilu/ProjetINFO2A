@@ -10,6 +10,8 @@ public class Player extends Entity{
     private int stones;
     private boolean win;
     private boolean teleported;
+
+    private boolean stoneLaunched;
     private TeleportationCase currentTeleportation;
 
     public TeleportationCase getCurrentTeleportation(){
@@ -18,6 +20,14 @@ public class Player extends Entity{
 
     public void setCurrentTeleportation(TeleportationCase value){
         currentTeleportation = value;
+    }
+
+    public boolean isStoneLaunched(){
+        return stoneLaunched;
+    }
+
+    public void setStoneLaunched(boolean value){
+        stoneLaunched = value;
     }
 
     public boolean isTeleported(){
