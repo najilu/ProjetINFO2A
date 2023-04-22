@@ -1,9 +1,10 @@
 package view;
 
+import consoleLibrary.ColoredChar;
 import consoleLibrary.Draw;
 import consoleLibrary.KeyListenerConsole;
-import controller.Controller;
-import model.Player;
+import controller.RuntimeController;
+import model.EntityMovable;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
@@ -14,7 +15,7 @@ public class GamePanel implements IViewable
     private int rowMax;
     private int colMax;
     private final Terminal terminal;
-    private Controller controller;
+    private RuntimeController runtimeController;
     private final Draw draw;
     private final KeyListenerConsole keyListener;
 
@@ -45,15 +46,19 @@ public class GamePanel implements IViewable
     }
 
     @Override
-    public void update() {
-        Player player = controller.getPlayer();
-        if((player.getOldX() != player.getX() || player.getOldY() != player.getY()) && player.getOldX() >= 0 && player.getOldY() >= 0){
-            draw.drawAt(player.getOldX(), player.getOldY(), controller.getMap().getEntity(player.getOldX(), player.getOldY()).getConsoleSprite().getColoredChar());
-            draw.drawAt(player.getX(), player.getY(), player.getConsoleSprite().getColoredChar());
+    public void update(EntityMovable entity) {
+        if((entity.getOldX() != entity.getX() || entity.getOldY() != entity.getY()) && entity.getOldX() >= 0 && entity.getOldY() >= 0){
+            draw.drawAt(entity.getOldX(), entity.getOldY(), runtimeController.getMap().getEntity(entity.getOldX(), entity.getOldY()).getConsoleSprite().getColoredChar());
+            draw.drawAt(entity.getX(), entity.getY(), entity.getConsoleSprite().getColoredChar());
         }
-        else if((player.getOldX() != player.getX() || player.getOldY() != player.getY())){
-            draw.drawAt(player.getX(), player.getY(), player.getConsoleSprite().getColoredChar());
+        else if((entity.getOldX() != entity.getX() || entity.getOldY() != entity.getY())){
+            draw.drawAt(entity.getX(), entity.getY(), entity.getConsoleSprite().getColoredChar());
         }
+    }
+
+    @Override
+    public void replace(EntityMovable entity, ColoredChar coloredChar){
+        draw.drawAt(entity.getX(), entity.getY(), coloredChar);
     }
 
     @Override
@@ -63,20 +68,22 @@ public class GamePanel implements IViewable
 
     @Override
     public void showHP() {
-        draw.showMessage(this, "x :" + controller.getPlayer().getX() + " y :" + controller.getPlayer().getY() + " HP : " + controller.getPlayer().getHP());
+        draw.showMessage(this, "x :" + runtimeController.getPlayer().getX() + " y :" + runtimeController.getPlayer().getY() + " HP : " + runtimeController.getPlayer().getHP()
+        + " stones : " + runtimeController.getPlayer().getStones())
+        ;
     }
 
     @Override
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setController(RuntimeController runtimeController) {
+        this.runtimeController = runtimeController;
     }
 
     @Override
     public void InitGamePanel() {
-        rowMax = controller.getMap().getRowMax();
-        colMax = controller.getMap().getColMax();
+        rowMax = runtimeController.getMap().getRowMax();
+        colMax = runtimeController.getMap().getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
-        draw.drawMap(this, controller.getMap());
+        draw.drawMap(this, runtimeController.getMap());
     }
 
     public void showWin(){

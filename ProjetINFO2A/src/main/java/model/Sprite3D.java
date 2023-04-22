@@ -2,7 +2,7 @@ package model;
 
 import java.awt.image.BufferedImage;
 
-public class Sprite3D implements ISpritable
+public class Sprite3D
 {
     BufferedImage[] images;
     public Sprite3D()

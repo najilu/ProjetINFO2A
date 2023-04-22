@@ -1,6 +1,7 @@
 package model;
 
 import consoleLibrary.ConsoleSprites;
+import controller.RuntimeController;
 
 public class GameEvaluator
 {
@@ -12,7 +13,10 @@ public class GameEvaluator
         if(map.getEntity(player.getX(), player.getY()) instanceof TeleportationCase tpCase){
             player.setTeleported(true);
             player.setCurrentTeleportation(tpCase);
-            //map.setEntity(tpCase.getTarget()[0], tpCase.getTarget()[1], player); // c'est de la merde le player est pas censé être sur la map faut que je patch ca
+        }
+        if(map.getEntity(player.getX(), player.getY()) instanceof StoneHeap stoneHeap){
+            player.setStones(player.getStones() + stoneHeap.getStoneCount());
+            map.setEntity(player.getX(), player.getY(), new NormalCase(ConsoleSprites.NORMALCASE.getValue()));
         }
         CheckWin(player, map);
     }
@@ -25,6 +29,18 @@ public class GameEvaluator
             {
                 player.setWin(true);
             }
+        }
+    }
+
+    static public void CheckHit(Cursor cursor, Map map){
+        if(map.getEntity(cursor.getX(), cursor.getY()) instanceof StoneHeap stoneHeap){
+            stoneHeap.setStoneCount(stoneHeap.getStoneCount()+1);
+        }
+        else if(map.getEntity(cursor.getX(), cursor.getY()) instanceof NormalCase normalCase && !normalCase.isVictoryCase()){
+            map.setEntity(cursor.getX(), cursor.getY(), new StoneHeap(ConsoleSprites.HEAPOFSTONE.getValue(), 1));
+        }
+        else if(map.getEntity(cursor.getX(), cursor.getY()) instanceof Bombe bombe){
+            map.setEntity(cursor.getX(), cursor.getY(), new NormalCase(ConsoleSprites.NORMALCASE.getValue()));
         }
     }
 }

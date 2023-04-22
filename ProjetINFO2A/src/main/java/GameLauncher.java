@@ -1,11 +1,11 @@
-import controller.Controller;
+import controller.RuntimeController;
 import view.GamePanel;
 
 public class GameLauncher
 {
     public static void main(String[] args)
     {
-        Controller controller = new Controller(new GamePanel(), 25,25);
-        controller.run();
+        RuntimeController runtimeController = new RuntimeController(new GamePanel(), 25,25);
+        runtimeController.run();
     }
 }

@@ -1,17 +1,12 @@
 package model;
 
-public class Player extends Entity{
-    private int x;
-    private int oldX;
-    private int y;
-    private int oldY;
+public class Player extends EntityMovable{
     private int HP;
-    private int speed;
     private int stones;
     private boolean win;
     private boolean teleported;
-
     private boolean stoneLaunched;
+
     private TeleportationCase currentTeleportation;
 
     public TeleportationCase getCurrentTeleportation(){
@@ -45,23 +40,6 @@ public class Player extends Entity{
     protected void setWin(boolean value){
         win = value;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    protected void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    protected void setY(int y) {
-        this.y = y;
-    }
-
     public int getHP() {
         return HP;
     }
@@ -70,29 +48,6 @@ public class Player extends Entity{
         this.HP = HP;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    protected void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getOldX() {
-        return oldX;
-    }
-
-    protected void setOldX(int oldX) {
-        this.oldX = oldX;
-    }
-
-    public int getOldY() {
-        return oldY;
-    }
-
-    protected void setOldY(int oldY) {
-        this.oldY = oldY;
-    }
 
     public int getStones()
     {
@@ -105,24 +60,15 @@ public class Player extends Entity{
     }
 
 
-    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, Sprite3D sprite3D , int speed) {
-        super(sprite3D, consoleSprite);
-        this.x = x;
-        this.oldY = -1;
-        this.oldX = -1;
-        this.y = y;
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, Sprite3D sprite3D , int speed, int stones) {
+        super(sprite3D, consoleSprite, x, y, speed);
         this.HP = HP;
-        this.speed = speed;
+        this.stones = stones;
+        setWin(false);
     }
 
 
-    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, int speed) {
-        super(new Sprite3D(), consoleSprite);
-        this.x = x;
-        this.oldY = -1;
-        this.oldX = -1;
-        this.y = y;
-        this.HP = HP;
-        this.speed = speed;
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, int speed, int stones) {
+        this(x, y, HP, consoleSprite, new Sprite3D(), speed, stones);
     }
 }
