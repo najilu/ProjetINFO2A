@@ -1,49 +1,62 @@
 package model;
 
-import controller.Controller;
+import controller.RuntimeController;
 
 public class InputManager {
-    Controller controller;
+    private final RuntimeController runtimeController;
+    private final EntityMovable entity;
 
-    public InputManager(Controller controller) {
-        this.controller = controller;
+    public InputManager(RuntimeController runtimeController, EntityMovable entity) {
+        this.runtimeController = runtimeController;
+        this.entity = entity;
     }
 
     public void inputRead(char input){
-        Player player = controller.getPlayer();
-        controller.getPlayer().setOldX(controller.getPlayer().getX());
-        controller.getPlayer().setOldY(controller.getPlayer().getY());
         switch (input){
             case 'z' -> {
-                if(canMove(player.getX(), player.getY()-player.getSpeed()))player.setY(player.getY()-1);
+                if(canMove(entity.getX(), entity.getY()-entity.getSpeed()))
+                    entity.saveCoordonate(entity.getX(), entity.getY()-1);
             }
             case 'q' -> {
-                if(canMove(player.getX()-player.getSpeed(), player.getY()))player.setX(player.getX()-1);
+                if(canMove(entity.getX()-entity.getSpeed(), entity.getY()))
+                    entity.saveCoordonate(entity.getX()-1, entity.getY());
             }
             case 'd' -> {
-                if(canMove(player.getX()+player.getSpeed(), player.getY()))player.setX(player.getX()+1);
+                if(canMove(entity.getX()+entity.getSpeed(), entity.getY()))
+                    entity.saveCoordonate(entity.getX()+1, entity.getY());
             }
             case 's' -> {
-                if(canMove(player.getX(), player.getY()+player.getSpeed()))player.setY(player.getY()+1);
+                if(canMove(entity.getX(), entity.getY()+entity.getSpeed()))
+                    entity.saveCoordonate(entity.getX(), entity.getY()+1);
             }
             case 'a' -> {
-                player.setStoneLaunched(true);
+                if(entity instanceof Player player){
+                    player.setStoneLaunched(true);
+                    runtimeController.setHaveFocus(false);
+                }
+                else if(entity instanceof Cursor){
+                    runtimeController.setHaveFocus(true);
+                }
+            }
+            case '5' -> { // regarder comment recuperer l'input entrée
+                if(entity instanceof Cursor cursor){
+                    cursor.setLocked(true);
+                }
             }
         }
     }
 
     private boolean canMove(int newX, int newY){
-        if(newX < controller.getMap().getColMax() && newX >= 0 && newY < controller.getMap().getRowMax() && newY >= 0){
-            return !(controller.getMap().getEntity(newX, newY) instanceof BigStone);
+        if(newX < runtimeController.getMap().getColMax() && newX >= 0 && newY < runtimeController.getMap().getRowMax() && newY >= 0){
+            // ici 3 est la range il faudra l'adapter quand maxime aura fait le système de compétence
+            if(entity instanceof Cursor)return (Math.abs(newX - runtimeController.getPlayer().getX()) <= 3 && Math.abs(newY - runtimeController.getPlayer().getY()) <= 3 );
+            if(entity instanceof Player)return !(runtimeController.getMap().getEntity(newX, newY) instanceof BigStone);
         }
         return false;
     }
 
     public void teleportePlayer(){
-        Player player = controller.getPlayer();
-        player.setOldX(player.getX());
-        player.setOldY(player.getY());
-        player.setX(player.getCurrentTeleportation().getTarget()[0]);
-        player.setY(player.getCurrentTeleportation().getTarget()[1]);
+        Player player = runtimeController.getPlayer();
+        player.saveCoordonate(player.getCurrentTeleportation().getTarget()[0],player.getCurrentTeleportation().getTarget()[1]);
     }
 }

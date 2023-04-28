@@ -9,7 +9,8 @@ public enum ConsoleSprites
     TELEPORTATIONCASE (new ColoredChar(Draw.BLOCK, Color.BLUE)),
     BIGSTONECASE (new ColoredChar(Draw.BLOCK, Color.BLACK)),
     HEAPOFSTONE (new ColoredChar(Draw.BLOCK, Color.GREY)),
-    VICTORYCASE (new ColoredChar(Draw.BLOCK, Color.YELLOW));
+    VICTORYCASE (new ColoredChar(Draw.BLOCK, Color.YELLOW)),
+    CURSORCASE (new ColoredChar(Draw.BLOCK, Color.PURPLE));
 
     final ColoredChar coloredChar;
     ConsoleSprites(ColoredChar coloredChar)

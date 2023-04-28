@@ -61,6 +61,10 @@ public class Map {
                         int[] coordonates= getRandomNormalCase(mapEntity);
                         mapEntity[rowIndex][colIndex] = new TeleportationCase(coordonates[0], coordonates[1], ConsoleSprites.TELEPORTATIONCASE.getValue());
                     }
+                    else if(noise > 0.90 && noise <0.90){ // a redesign ya un problème
+                        // 5 etant le maximum a cause de la chance (compétence design par maxime)
+                        mapEntity[rowIndex][colIndex] = new StoneHeap(ConsoleSprites.HEAPOFSTONE.getValue(), random.nextInt(0,5));
+                    }
                     else{
                         mapEntity[rowIndex][colIndex] = new NormalCase(ConsoleSprites.NORMALCASE.getValue());
                     }
@@ -76,9 +80,9 @@ public class Map {
     }
 
     private int[] getRandomNormalCase(Entity[][] entityVector){
-        boolean isFined = false;
+        boolean isFine = false;
         Random random = new Random();
-        while (!isFined){
+        while (!isFine){
             int y = random.nextInt(0, entityVector.length);
             int x = random.nextInt(0, entityVector[y].length);
             Entity caseChosen = entityVector[y][x];

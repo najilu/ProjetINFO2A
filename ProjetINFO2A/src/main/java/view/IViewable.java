@@ -1,21 +1,25 @@
 package view;
 
-import controller.Controller;
+import consoleLibrary.ColoredChar;
+import controller.RuntimeController;
+import model.EntityMovable;
 
 public interface IViewable
 {
 
-    void update();
+    public void update(EntityMovable entity);
 
-    char LaunchListener();
+    public void replace(EntityMovable entity, ColoredChar coloredChar);
 
-    void showHP();
+    public char LaunchListener();
 
-    void setController(Controller controller);
+    public void showHP();
 
-    void InitGamePanel();
+    public void setController(RuntimeController runtimeController);
 
-    void showWin();
+    public void InitGamePanel();
 
-    void showLose();
+    public void showWin();
+
+    public void showLose();
 }

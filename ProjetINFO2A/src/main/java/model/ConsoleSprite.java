@@ -3,7 +3,7 @@ package model;
 import consoleLibrary.Color;
 import consoleLibrary.ColoredChar;
 
-public class ConsoleSprite implements ISpritable
+public class ConsoleSprite
 {
     ColoredChar coloredChar;
 
