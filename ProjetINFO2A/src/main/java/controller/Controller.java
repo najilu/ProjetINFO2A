@@ -109,6 +109,10 @@ public class Controller
     //ajouter le lancer des pierres
     //ajouter le poisson sampling
     //ajouter les menus contextuelles
+    
+    // installer maven
+    // fonctionnalité dev par maxime ?
+
     //endregion
 
 }
