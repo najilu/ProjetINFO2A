@@ -1,6 +1,9 @@
-package model;
+package model.CasesMap;
 
-public class BigStone extends Entity
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class BigStone extends SpritableEntity
 {
 
     public BigStone(Sprite3D sprite3D, ConsoleSprite consoleSprite)

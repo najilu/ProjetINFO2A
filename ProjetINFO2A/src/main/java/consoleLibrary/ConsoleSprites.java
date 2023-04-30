@@ -1,16 +1,14 @@
 package consoleLibrary;
 
-import model.ConsoleSprite;
-
 public enum ConsoleSprites
 {
-    NORMALCASE (new ColoredChar(Draw.BLOCK, Color.GREEN)),
-    BOMBECASE (new ColoredChar(Draw.BLOCK, Color.RED)),
-    TELEPORTATIONCASE (new ColoredChar(Draw.BLOCK, Color.BLUE)),
-    BIGSTONECASE (new ColoredChar(Draw.BLOCK, Color.BLACK)),
-    HEAPOFSTONE (new ColoredChar(Draw.BLOCK, Color.GREY)),
-    VICTORYCASE (new ColoredChar(Draw.BLOCK, Color.YELLOW)),
-    CURSORCASE (new ColoredChar(Draw.BLOCK, Color.PURPLE));
+    NORMALCASE (new ColoredChar("\uD83D\uDFE9")),
+    BOMBECASE (new ColoredChar("\uD83D\uDCA3")),
+    TELEPORTATIONCASE (new ColoredChar("\uD83C\uDF00")),
+    BIGSTONECASE (new ColoredChar("\uD83C\uDF32")),
+    HEAPOFSTONE (new ColoredChar("🪨")),
+    VICTORYCASE (new ColoredChar('⭐')),
+    CURSORCASE (new ColoredChar("\uD83C\uDFAF"));
 
     final ColoredChar coloredChar;
     ConsoleSprites(ColoredChar coloredChar)

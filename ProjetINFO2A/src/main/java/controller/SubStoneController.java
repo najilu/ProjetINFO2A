@@ -1,12 +1,10 @@
 package controller;
 
-import consoleLibrary.Color;
-import model.Cursor;
+import model.Movable.Cursor;
 import model.GameEvaluator;
 import model.InputManager;
+import settings.SettingsListName;
 import view.IViewable;
-
-import java.awt.*;
 
 public class SubStoneController implements IController{
     public enum GameState{
@@ -62,6 +60,9 @@ public class SubStoneController implements IController{
             case UserChoice -> {
                 if(!cursor.isLocked()){
                     inputManager.inputRead(view.LaunchListener());
+                    if(cursor.isOpenMenu()){
+                        swapController(new SubMenuController(view, runtimeController, SettingsListName.WallHack, SettingsListName.GodMod));
+                    }
                     nextStep();
                 }
                 else{
@@ -74,6 +75,7 @@ public class SubStoneController implements IController{
             }
             case Hit -> {
                 runtimeController.getPlayer().setStones(runtimeController.getPlayer().getStones() -1);
+                view.showInformation();
                 GameEvaluator.CheckHit(cursor, runtimeController.getMap());
                 view.replace(cursor, runtimeController.getMap().getEntity(cursor.getX(), cursor.getY()).getConsoleSprite().getColoredChar());
                 runtimeController.setHaveFocus(true);
@@ -83,5 +85,10 @@ public class SubStoneController implements IController{
 
             }
         }
+    }
+
+    @Override
+    public void swapController(IController controller){
+        controller.run();
     }
 }

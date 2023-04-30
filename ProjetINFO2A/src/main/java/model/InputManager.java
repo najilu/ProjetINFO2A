@@ -1,6 +1,14 @@
 package model;
 
 import controller.RuntimeController;
+import controller.SubMenuController;
+import model.CasesMap.BigStone;
+import model.Movable.Cursor;
+import model.Movable.EntityMovable;
+import model.Movable.Player;
+import settings.Setting;
+
+import java.util.Objects;
 
 public class InputManager {
     private final RuntimeController runtimeController;
@@ -30,7 +38,7 @@ public class InputManager {
                     entity.saveCoordonate(entity.getX(), entity.getY()+1);
             }
             case 'a' -> {
-                if(entity instanceof Player player){
+                if(entity instanceof Player player && player.getStones() > 0){
                     player.setStoneLaunched(true);
                     runtimeController.setHaveFocus(false);
                 }
@@ -43,6 +51,9 @@ public class InputManager {
                     cursor.setLocked(true);
                 }
             }
+            case 'm' -> {
+                entity.setOpenMenu(true);
+            }
         }
     }
 
@@ -50,7 +61,7 @@ public class InputManager {
         if(newX < runtimeController.getMap().getColMax() && newX >= 0 && newY < runtimeController.getMap().getRowMax() && newY >= 0){
             // ici 3 est la range il faudra l'adapter quand maxime aura fait le système de compétence
             if(entity instanceof Cursor)return (Math.abs(newX - runtimeController.getPlayer().getX()) <= 3 && Math.abs(newY - runtimeController.getPlayer().getY()) <= 3 );
-            if(entity instanceof Player)return !(runtimeController.getMap().getEntity(newX, newY) instanceof BigStone);
+            if(entity instanceof Player)return !(runtimeController.getMap().getEntity(newX, newY) instanceof BigStone && Objects.equals(runtimeController.getSetting(1).getValue(), "false"));
         }
         return false;
     }
@@ -58,5 +69,29 @@ public class InputManager {
     public void teleportePlayer(){
         Player player = runtimeController.getPlayer();
         player.saveCoordonate(player.getCurrentTeleportation().getTarget()[0],player.getCurrentTeleportation().getTarget()[1]);
+    }
+
+    public void inputMenu(char key, SubMenuController controller){
+        switch (key){
+            case 'z' -> {
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
+                controller.setIndexOfFocus(Setting.clamp(0, controller.getSettings().length, controller.getIndexOfFocus()-1));
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(true);
+            }
+            case 's' -> {
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
+                controller.setIndexOfFocus(Setting.clamp(0, controller.getSettings().length, controller.getIndexOfFocus()+1));
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(true);
+            }
+            case 'q' -> {
+                controller.getSettings()[controller.getIndexOfFocus()].changeValue(false);
+            }
+            case 'd' -> {
+                controller.getSettings()[controller.getIndexOfFocus()].changeValue(true);
+            }
+            case 'm'->{
+                controller.setWantCloseMenu(true);
+            }
+        }
     }
 }

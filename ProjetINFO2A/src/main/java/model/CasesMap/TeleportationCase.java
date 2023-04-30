@@ -1,6 +1,9 @@
-package model;
+package model.CasesMap;
 
-public class TeleportationCase extends Entity
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class TeleportationCase extends SpritableEntity
 {
     private final int targetCol;
     private final int targetRow;

@@ -1,6 +1,9 @@
-package model;
+package model.CasesMap;
 
-public class StoneHeap extends Entity
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class StoneHeap extends SpritableEntity
 {
     private int stoneCount;
 

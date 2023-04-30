@@ -2,7 +2,11 @@ package view;
 
 import consoleLibrary.ColoredChar;
 import controller.RuntimeController;
-import model.EntityMovable;
+import model.Movable.EntityMovable;
+import settings.Setting;
+import settings.SettingsListName;
+
+import java.util.Map;
 
 public interface IViewable
 {
@@ -13,7 +17,7 @@ public interface IViewable
 
     public char LaunchListener();
 
-    public void showHP();
+    public void showInformation();
 
     public void setController(RuntimeController runtimeController);
 
@@ -22,4 +26,6 @@ public interface IViewable
     public void showWin();
 
     public void showLose();
+
+    public void showMenu(Map<String, Setting> params, SettingsListName[] settingsListNames);
 }

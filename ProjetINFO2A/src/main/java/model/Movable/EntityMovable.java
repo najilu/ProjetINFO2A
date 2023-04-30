@@ -1,11 +1,17 @@
-package model;
+package model.Movable;
 
-public class EntityMovable extends Entity {
+import consoleLibrary.ConsoleSprite;
+import model.CasesMap.SpritableEntity;
+import model.Sprite3D;
+
+public class EntityMovable extends SpritableEntity
+{
     private int oldX;
+
     private int oldY;
     private int x;
     private int y;
-
+    private boolean openMenu;
     private int speed;
 
     public EntityMovable(Sprite3D sprite3D, ConsoleSprite consoleSprite, int x, int y, int speed) {
@@ -15,6 +21,7 @@ public class EntityMovable extends Entity {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        visible = true;
     }
 
     public EntityMovable(ConsoleSprite consoleSprite, int x, int y, int speed) {
@@ -24,6 +31,17 @@ public class EntityMovable extends Entity {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        visible = true;
+    }
+
+    public boolean isOpenMenu()
+    {
+        return openMenu;
+    }
+
+    public void setOpenMenu(boolean openMenu)
+    {
+        this.openMenu = openMenu;
     }
 
     public int getOldX() {

@@ -1,6 +1,9 @@
-package model;
+package model.CasesMap;
 
-public class NormalCase extends Entity
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class NormalCase extends SpritableEntity
 {
     private final boolean victoryCase;
     public boolean isVictoryCase(){

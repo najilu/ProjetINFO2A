@@ -1,4 +1,4 @@
-package model;
+package consoleLibrary;
 
 import consoleLibrary.Color;
 import consoleLibrary.ColoredChar;

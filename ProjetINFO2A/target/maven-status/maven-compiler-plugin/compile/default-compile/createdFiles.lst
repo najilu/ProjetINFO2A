@@ -1,6 +1,8 @@
 model\GameEvaluator.class
+controller\SubMenuController$GameState.class
 model\NormalCase.class
 model\InputManager.class
+settings\Setting.class
 model\Map.class
 model\TeleportationCase.class
 model\Entity.class
@@ -9,6 +11,7 @@ view\GamePanel.class
 view\IViewable.class
 consoleLibrary\ColoredChar.class
 controller\RuntimeController$GameState.class
+controller\SubMenuController$1.class
 model\BigStone.class
 consoleLibrary\ConsoleSprites.class
 model\Cursor.class
@@ -20,5 +23,6 @@ model\Sprite3D.class
 model\Player.class
 controller\RuntimeController$1.class
 GameLauncher.class
+controller\SubMenuController.class
 consoleLibrary\KeyListenerConsole.class
 model\Bombe.class

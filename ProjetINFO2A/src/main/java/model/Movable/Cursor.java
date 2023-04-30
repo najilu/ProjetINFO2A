@@ -1,6 +1,10 @@
-package model;
+package model.Movable;
 
-public class Cursor extends EntityMovable{
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class Cursor extends EntityMovable
+{
 
     private boolean locked = false;
 

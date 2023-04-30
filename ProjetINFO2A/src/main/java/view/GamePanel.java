@@ -4,11 +4,19 @@ import consoleLibrary.ColoredChar;
 import consoleLibrary.Draw;
 import consoleLibrary.KeyListenerConsole;
 import controller.RuntimeController;
-import model.EntityMovable;
+import model.Movable.EntityMovable;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
+import settings.BooleanSetting;
+import settings.Setting;
+import settings.SettingsListName;
+
+
 import java.io.IOException;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class GamePanel implements IViewable
 {
@@ -67,8 +75,10 @@ public class GamePanel implements IViewable
     }
 
     @Override
-    public void showHP() {
-        draw.showMessage(this, "x :" + runtimeController.getPlayer().getX() + " y :" + runtimeController.getPlayer().getY() + " HP : " + runtimeController.getPlayer().getHP()
+    public void showInformation() {
+        BooleanSetting godmod = (BooleanSetting) RuntimeController.Param.get(SettingsListName.GodMod);
+
+        draw.showMessage(this, "x :" + runtimeController.getPlayer().getX() + " y :" + runtimeController.getPlayer().getY() + (godmod.getValue()? (" HP : " + runtimeController.getPlayer().getHP()) : " GodMod activé ")
         + " stones : " + runtimeController.getPlayer().getStones())
         ;
     }
@@ -83,7 +93,9 @@ public class GamePanel implements IViewable
         rowMax = runtimeController.getMap().getRowMax();
         colMax = runtimeController.getMap().getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
-        draw.drawMap(this, runtimeController.getMap());
+
+        BooleanSetting wallHack = (BooleanSetting) RuntimeController.Param.get(SettingsListName.WallHack);
+        draw.drawMap(this, runtimeController.getMap(), wallHack.getValue());
     }
 
     public void showWin(){
@@ -118,5 +130,26 @@ public class GamePanel implements IViewable
         terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 
+    public void showMenu(Map<String, Setting> params, SettingsListName[] settingsListNames){
+        Draw.clear();
+        terminal.writer().print("""
 
+                 _____      _   _   _                    \s
+                /  ___|    | | | | (_)                  _\s
+                \\ `--.  ___| |_| |_ _ _ __   __ _ ___  (_)
+                 `--. \\/ _ \\ __| __| | '_ \\ / _` / __|   \s
+                /\\__/ /  __/ |_| |_| | | | | (_| \\__ \\  _\s
+                \\____/ \\___|\\__|\\__|_|_| |_|\\__, |___/ (_)
+                                             __/ |       \s
+                                            |___/        \s
+                """);
+
+        terminal.writer().println();
+        terminal.writer().println();
+
+
+        for(SettingsListName name : settingsListNames){
+            terminal.writer().println(RuntimeController.Param.get(name));
+        }
+    }
 }

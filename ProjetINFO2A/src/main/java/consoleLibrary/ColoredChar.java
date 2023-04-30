@@ -15,7 +15,14 @@ public class ColoredChar
     public ColoredChar(char c, char c2, Color color){
         this(c, color);
         optionnalChar = c2;
+    }
 
+    public ColoredChar(String string, Color color){
+        this(string.charAt(0), string.charAt(1), color);
+    }
+
+    public ColoredChar(String string){
+        this(string.charAt(0), string.charAt(1), Color.RESET);
     }
 
 
@@ -32,6 +39,6 @@ public class ColoredChar
     @Override
     public String toString()
     {
-        return color + "" +c+ ((optionnalChar == 0) ? c : optionnalChar);
+        return color + "" +c+ ((optionnalChar == 0) ? "" : optionnalChar);
     }
 }

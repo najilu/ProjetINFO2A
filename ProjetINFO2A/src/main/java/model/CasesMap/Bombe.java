@@ -1,6 +1,9 @@
-package model;
+package model.CasesMap;
 
-public class Bombe extends Entity
+import consoleLibrary.ConsoleSprite;
+import model.Sprite3D;
+
+public class Bombe extends SpritableEntity
 {
 
     public Bombe(Sprite3D sprite3D, ConsoleSprite consoleSprite)

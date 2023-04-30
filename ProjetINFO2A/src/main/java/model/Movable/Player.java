@@ -1,6 +1,12 @@
-package model;
+package model.Movable;
 
-public class Player extends EntityMovable{
+import consoleLibrary.ConsoleSprite;
+import model.CasesMap.TeleportationCase;
+import model.Movable.EntityMovable;
+import model.Sprite3D;
+
+public class Player extends EntityMovable
+{
     private int HP;
     private int stones;
     private boolean win;
@@ -37,14 +43,14 @@ public class Player extends EntityMovable{
         return win;
     }
 
-    protected void setWin(boolean value){
+    public void setWin(boolean value){
         win = value;
     }
     public int getHP() {
         return HP;
     }
 
-    protected void setHP(int HP) {
+    public void setHP(int HP) {
         this.HP = HP;
     }
 
