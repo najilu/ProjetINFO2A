@@ -2,6 +2,7 @@ package model.CasesMap;
 
 import consoleLibrary.ColoredChar;
 import consoleLibrary.ConsoleSprite;
+import controller.RuntimeController;
 import model.Sprite3D;
 
 public class SpritableEntity
@@ -12,13 +13,9 @@ public class SpritableEntity
     public Sprite3D get3DSprite(){
         return sprite3D;
     }
-    public ConsoleSprite getConsoleSprite(){
-        if(visible)return consoleSprite;
-        else return new ConsoleSprite(new ColoredChar("\uD83D\uDFE7")) ;
-    }
 
-    public ConsoleSprite getConsoleSprite(boolean wallHack){
-        if(wallHack||visible)return consoleSprite;
+    public ConsoleSprite getConsoleSprite(){
+        if(RuntimeController.settings.get(5).getBooleanValue() ||visible)return consoleSprite;
         else return new ConsoleSprite(new ColoredChar("\uD83D\uDFE7")) ;
     }
 

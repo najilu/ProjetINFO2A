@@ -8,15 +8,9 @@ import model.Movable.EntityMovable;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
-import settings.BooleanSetting;
 import settings.Setting;
-import settings.SettingsListName;
-
-
 import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class GamePanel implements IViewable
 {
@@ -76,9 +70,7 @@ public class GamePanel implements IViewable
 
     @Override
     public void showInformation() {
-        BooleanSetting godmod = (BooleanSetting) RuntimeController.Param.get(SettingsListName.GodMod);
-
-        draw.showMessage(this, "x :" + runtimeController.getPlayer().getX() + " y :" + runtimeController.getPlayer().getY() + (godmod.getValue()? (" HP : " + runtimeController.getPlayer().getHP()) : " GodMod activé ")
+        draw.showMessage(this, "x :" + runtimeController.getPlayer().getX() + " y :" + runtimeController.getPlayer().getY() + (!RuntimeController.settings.get(6).getBooleanValue() ? (" HP : " + runtimeController.getPlayer().getHP()) : " GodMod activé ")
         + " stones : " + runtimeController.getPlayer().getStones())
         ;
     }
@@ -94,8 +86,7 @@ public class GamePanel implements IViewable
         colMax = runtimeController.getMap().getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
 
-        BooleanSetting wallHack = (BooleanSetting) RuntimeController.Param.get(SettingsListName.WallHack);
-        draw.drawMap(this, runtimeController.getMap(), wallHack.getValue());
+        draw.drawMap(this, runtimeController.getMap(), RuntimeController.settings.get(5).getBooleanValue());
     }
 
     public void showWin(){
@@ -130,7 +121,7 @@ public class GamePanel implements IViewable
         terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 
-    public void showMenu(Map<String, Setting> params, SettingsListName[] settingsListNames){
+    public void showMenu(Setting[] settings){
         Draw.clear();
         terminal.writer().print("""
 
@@ -142,14 +133,15 @@ public class GamePanel implements IViewable
                 \\____/ \\___|\\__|\\__|_|_| |_|\\__, |___/ (_)
                                              __/ |       \s
                                             |___/        \s
+                ________________________________________________
                 """);
 
         terminal.writer().println();
         terminal.writer().println();
 
-
-        for(SettingsListName name : settingsListNames){
-            terminal.writer().println(RuntimeController.Param.get(name));
+        for(Setting setting : settings){
+            terminal.writer().println(setting);
         }
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 }

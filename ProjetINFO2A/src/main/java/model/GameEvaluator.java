@@ -8,32 +8,29 @@ import model.CasesMap.StoneHeap;
 import model.CasesMap.TeleportationCase;
 import model.Movable.Cursor;
 import model.Movable.Player;
-import settings.BooleanSetting;
-import settings.SettingsListName;
-
 import java.util.Objects;
 
 public class GameEvaluator
 {
     static public void CheckNewCase(Player player, Field field, RuntimeController runtimeController){
         if(field.getEntity(player.getX(), player.getY()) instanceof Bombe){
-            BooleanSetting godMod = (BooleanSetting) RuntimeController.Param.get(SettingsListName.GodMod);
-            if(!godMod.getValue())
+            if(!RuntimeController.settings.get(6).getBooleanValue())
             {
                 player.setHP(player.getHP()-1);
                 field.setEntity(player.getX(), player.getY(), new NormalCase(ConsoleSprites.NORMALCASE.getValue()));
-                field.getEntity(player.getX(), player.getY()).setVisible(true);
+                //field.getEntity(player.getX(), player.getY()).setVisible(true);
             }
 
         }
         if(field.getEntity(player.getX(), player.getY()) instanceof TeleportationCase tpCase){
             player.setTeleported(true);
             player.setCurrentTeleportation(tpCase);
+            field.getEntity(tpCase.getTarget()[0], tpCase.getTarget()[1]).setVisible(true);
         }
         if(field.getEntity(player.getX(), player.getY()) instanceof StoneHeap stoneHeap){
             player.setStones(player.getStones() + stoneHeap.getStoneCount());
             field.setEntity(player.getX(), player.getY(), new NormalCase(ConsoleSprites.NORMALCASE.getValue()));
-            field.getEntity(player.getX(), player.getY()).setVisible(true);
+            //field.getEntity(player.getX(), player.getY()).setVisible(true);
         }
         field.getEntity(player.getX(), player.getY()).setVisible(true);
         CheckWin(player, field);

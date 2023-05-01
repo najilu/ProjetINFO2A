@@ -27,5 +27,5 @@ public interface IViewable
 
     public void showLose();
 
-    public void showMenu(ArrayList<Setting> settings);
+    public void showMenu(Setting[] settings);
 }

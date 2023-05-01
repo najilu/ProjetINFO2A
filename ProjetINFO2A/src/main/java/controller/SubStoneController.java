@@ -3,8 +3,9 @@ package controller;
 import model.Movable.Cursor;
 import model.GameEvaluator;
 import model.InputManager;
-import settings.SettingsListName;
 import view.IViewable;
+
+import javax.swing.text.View;
 
 public class SubStoneController implements IController{
     public enum GameState{
@@ -61,7 +62,10 @@ public class SubStoneController implements IController{
                 if(!cursor.isLocked()){
                     inputManager.inputRead(view.LaunchListener());
                     if(cursor.isOpenMenu()){
-                        swapController(new SubMenuController(view, runtimeController, SettingsListName.WallHack, SettingsListName.GodMod));
+                        swapController(new SubMenuController(view, runtimeController, RuntimeController.settings.get(5), RuntimeController.settings.get(6)));
+                        view.InitGamePanel();
+                        runtimeController.setHaveFocus(true);
+                        gameState = GameState.End;
                     }
                     nextStep();
                 }
@@ -77,12 +81,11 @@ public class SubStoneController implements IController{
                 runtimeController.getPlayer().setStones(runtimeController.getPlayer().getStones() -1);
                 view.showInformation();
                 GameEvaluator.CheckHit(cursor, runtimeController.getMap());
-                view.replace(cursor, runtimeController.getMap().getEntity(cursor.getX(), cursor.getY()).getConsoleSprite().getColoredChar());
-                runtimeController.setHaveFocus(true);
                 nextStep();
             }
             case End -> {
-
+                view.replace(cursor, runtimeController.getMap().getEntity(cursor.getX(), cursor.getY()).getConsoleSprite().getColoredChar());
+                runtimeController.setHaveFocus(true);
             }
         }
     }

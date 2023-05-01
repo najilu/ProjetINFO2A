@@ -2,7 +2,6 @@ package controller;
 
 import model.InputManager;
 import settings.Setting;
-import settings.SettingsListName;
 import view.IViewable;
 
 public class SubMenuController implements IController
@@ -17,13 +16,16 @@ public class SubMenuController implements IController
     private InputManager inputManager;
 
     private Setting[] settings;
+    private int indexOfFocus;
 
-    public SubMenuController(IViewable view, RuntimeController runtimeController)
+    public SubMenuController(IViewable view, RuntimeController runtimeController, Setting... settings)
     {
         this.view = view;
         this.runtimeController = runtimeController;
         inputManager = new InputManager(runtimeController, runtimeController.getPlayer());
         gameState = GameState.update;
+        this.settings = settings;
+        settings[0].setFocus(true);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class SubMenuController implements IController
     {
         switch (gameState){
             case update -> {
-                view.showMenu(RuntimeController.settings);
+                view.showMenu(settings);
                 nextStep();
             }
             case userInput -> {
@@ -62,6 +64,9 @@ public class SubMenuController implements IController
     public void setIndexOfFocus(int value)
     {
         indexOfFocus=value;
+    }
+    public Setting[] getSettings(){
+        return settings;
     }
     public void setWantCloseMenu(boolean value){
         wantCloseMenu=value;

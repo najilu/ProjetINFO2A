@@ -33,7 +33,7 @@ public class Draw {
         terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
         for (int rowIndex = 0; rowIndex<gamePanel.getRowMax(); rowIndex++){
             for(int colIndex =0; colIndex<gamePanel.getColMax();colIndex++){
-                terminal.writer().print(field.getEntity(colIndex, rowIndex).getConsoleSprite(wallHack).getColoredChar());
+                terminal.writer().print(field.getEntity(colIndex, rowIndex).getConsoleSprite().getColoredChar());
             }
             terminal.writer().println();
         }

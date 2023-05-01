@@ -87,7 +87,7 @@ public class Setting {
 
     @Override
     public String toString() {
-        return ((focus) ? "s" : "") + name + " : " + value;
+        return ((focus) ? "➡" : "") + name + " : " + value;
     }
 
 

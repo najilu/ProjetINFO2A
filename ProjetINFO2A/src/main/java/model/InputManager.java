@@ -61,7 +61,7 @@ public class InputManager {
         if(newX < runtimeController.getMap().getColMax() && newX >= 0 && newY < runtimeController.getMap().getRowMax() && newY >= 0){
             // ici 3 est la range il faudra l'adapter quand maxime aura fait le système de compétence
             if(entity instanceof Cursor)return (Math.abs(newX - runtimeController.getPlayer().getX()) <= 3 && Math.abs(newY - runtimeController.getPlayer().getY()) <= 3 );
-            if(entity instanceof Player)return !(runtimeController.getMap().getEntity(newX, newY) instanceof BigStone && Objects.equals(runtimeController.getSetting(1).getValue(), "false"));
+            if(entity instanceof Player)return (!(runtimeController.getMap().getEntity(newX, newY) instanceof BigStone) || (RuntimeController.settings.get(6).getBooleanValue()));
         }
         return false;
     }
@@ -74,13 +74,13 @@ public class InputManager {
     public void inputMenu(char key, SubMenuController controller){
         switch (key){
             case 'z' -> {
-                controller.get()[controller.getIndexOfFocus()].setFocus(false);
-                controller.setIndexOfFocus(Setting.clamp(0, controller.getSettings().length, controller.getIndexOfFocus()-1));
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
+                controller.setIndexOfFocus(Setting.circulation(controller.getIndexOfFocus()-1, 0, controller.getSettings().length-1));
                 controller.getSettings()[controller.getIndexOfFocus()].setFocus(true);
             }
             case 's' -> {
                 controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
-                controller.setIndexOfFocus(Setting.clamp(0, controller.getSettings().length, controller.getIndexOfFocus()+1));
+                controller.setIndexOfFocus(Setting.circulation(controller.getIndexOfFocus()+1, 0, controller.getSettings().length-1));
                 controller.getSettings()[controller.getIndexOfFocus()].setFocus(true);
             }
             case 'q' -> {
@@ -90,6 +90,7 @@ public class InputManager {
                 controller.getSettings()[controller.getIndexOfFocus()].changeValue(true);
             }
             case 'm'->{
+                controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
                 controller.setWantCloseMenu(true);
             }
         }

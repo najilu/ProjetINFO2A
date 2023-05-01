@@ -6,16 +6,15 @@ import model.*;
 import model.Movable.Cursor;
 import model.Movable.Player;
 import settings.Setting;
-import settings.SettingsListName;
 import view.IViewable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RuntimeController
 {
 
     public static ArrayList<Setting> settings = new ArrayList<>();
-    public static int indexOfFocus = 0;
 
     public enum GameState{
         GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, TeleportationInProgress, LosePhase,
@@ -23,25 +22,26 @@ public class RuntimeController
     }
 
     //element du model pas encore pret
-    private final Player player;
+    private Player player;
     private GameState gameState;
     private boolean haveFocus;
     public GameState getGameState() {
         return gameState;
     }
     private final IViewable view;
-    private final InputManager inputManager;
-    private final Field field;
+    private InputManager inputManager;
+    private Field field;
 
-    public RuntimeController(IViewable view, int rowMax, int colMax)
+    public RuntimeController(IViewable view)
     {
-        // le nombre de stone (ici 3) est determiner par la difficultée système incorporer par maxime normallement
-        player = new Player(0,0,3,new ConsoleSprite(new ColoredChar("\uD83E\uDDDD")), 1, 3);
-        field = new Field(rowMax,colMax, player);
+
+
+        //player = new Player(0,0,3,new ConsoleSprite(new ColoredChar("\uD83E\uDDDD")), 1, 3);
+        //field = new Field(rowMax,colMax, player);
         this.gameState = GameState.GameInitialisation;
         this.view = view;
         view.setController(this);
-        inputManager = new InputManager(this, player);
+        //inputManager = new InputManager(this, player);
     }
 
     public void startGame(){
@@ -64,7 +64,17 @@ public class RuntimeController
     {
         switch (gameState){
             case GameInitialisation -> {
-                swapController(new SubMenuController(view, this, settings));
+                settings.add(new Setting("Nombre de ligne", 5, 25, 5));
+                settings.add(new Setting("Nombre de colonne", 5, 25, 5));
+                settings.add(new Setting("Nombre de pierre", 1, 0, 8));
+                Setting[] settings1 = new Setting[settings.size()];
+                swapController(new SubMenuController(view, this, settings.toArray(settings1)));
+
+                player = new Player(0,0,3,new ConsoleSprite(new ColoredChar("\uD83E\uDDDD")), 1, settings.get(9).getIntValue());
+                field = new Field(settings.get(7).getIntValue(),settings.get(8).getIntValue(), player);
+                inputManager = new InputManager(this, player);
+
+
                 view.InitGamePanel();
                 nextStep();
             }
@@ -84,7 +94,7 @@ public class RuntimeController
                     run();
                 }
                 if(player.isOpenMenu()){
-                    swapController(new SubMenuController(view, this, SettingsListName.WallHack, SettingsListName.GodMod));
+                    swapController(new SubMenuController(view, this, settings.get(5), settings.get(6)));
                     view.InitGamePanel();
                     view.update(player);
                     player.setOpenMenu(false);
@@ -113,6 +123,7 @@ public class RuntimeController
             case StoneLaunch -> {
                 swapController(new SubStoneController(this, new Cursor(ConsoleSprites.CURSORCASE.getValue(), player.getX(), player.getY(), 1), view));
                 player.setStoneLaunched(false);
+                player.setOpenMenu(false);
                 nextStep();
             }
         }
