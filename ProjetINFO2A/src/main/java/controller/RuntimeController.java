@@ -9,13 +9,14 @@ import settings.Setting;
 import settings.SettingsListName;
 import view.IViewable;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 public class RuntimeController
 {
 
-    public static Map<String, Setting> Param;
-    public static SettingsListName[] ParamNames;
+    public static ArrayList<Setting> settings = new ArrayList<>();
+    public static int indexOfFocus = 0;
+
     public enum GameState{
         GameInitialisation ,Update, PlayerAction, Checking, DommagePhase, WinPhase, TeleportationInProgress, LosePhase,
         StoneLaunch;
@@ -63,7 +64,7 @@ public class RuntimeController
     {
         switch (gameState){
             case GameInitialisation -> {
-                swapController(new SubMenuController(view, this, SettingsListName.values()));
+                swapController(new SubMenuController(view, this, settings));
                 view.InitGamePanel();
                 nextStep();
             }

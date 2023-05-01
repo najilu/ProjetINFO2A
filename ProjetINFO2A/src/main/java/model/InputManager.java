@@ -74,7 +74,7 @@ public class InputManager {
     public void inputMenu(char key, SubMenuController controller){
         switch (key){
             case 'z' -> {
-                controller.getSettings()[controller.getIndexOfFocus()].setFocus(false);
+                controller.get()[controller.getIndexOfFocus()].setFocus(false);
                 controller.setIndexOfFocus(Setting.clamp(0, controller.getSettings().length, controller.getIndexOfFocus()-1));
                 controller.getSettings()[controller.getIndexOfFocus()].setFocus(true);
             }

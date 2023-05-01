@@ -15,16 +15,14 @@ public class SubMenuController implements IController
     private GameState gameState;
     private RuntimeController runtimeController;
     private InputManager inputManager;
-    private int indexOfFocus;
-    private SettingsListName[] settingsListNames;
 
-    public SubMenuController(IViewable view, RuntimeController runtimeController, SettingsListName... settings)
+    private Setting[] settings;
+
+    public SubMenuController(IViewable view, RuntimeController runtimeController)
     {
         this.view = view;
         this.runtimeController = runtimeController;
         inputManager = new InputManager(runtimeController, runtimeController.getPlayer());
-        this.settingsListNames = settings;
-        indexOfFocus=0;
         gameState = GameState.update;
     }
 
@@ -43,7 +41,7 @@ public class SubMenuController implements IController
     {
         switch (gameState){
             case update -> {
-                view.showMenu(RuntimeController.Param, settingsListNames);
+                view.showMenu(RuntimeController.settings);
                 nextStep();
             }
             case userInput -> {

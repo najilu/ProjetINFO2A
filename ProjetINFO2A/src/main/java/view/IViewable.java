@@ -4,8 +4,8 @@ import consoleLibrary.ColoredChar;
 import controller.RuntimeController;
 import model.Movable.EntityMovable;
 import settings.Setting;
-import settings.SettingsListName;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public interface IViewable
@@ -27,5 +27,5 @@ public interface IViewable
 
     public void showLose();
 
-    public void showMenu(Map<String, Setting> params, SettingsListName[] settingsListNames);
+    public void showMenu(ArrayList<Setting> settings);
 }
