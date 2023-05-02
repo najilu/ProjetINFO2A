@@ -1,7 +1,7 @@
 package model.CasesMap;
 
-import consoleLibrary.ColoredChar;
-import consoleLibrary.ConsoleSprite;
+import ConsoleLibrary.ColoredChar;
+import ConsoleLibrary.ConsoleSprite;
 import controller.RuntimeController;
 import model.Sprite3D;
 
@@ -28,9 +28,4 @@ public class SpritableEntity
         visible = value;
     }
 
-    @Override
-    public String toString()
-    {
-        return this.getClass().getSimpleName();
-    }
 }

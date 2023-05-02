@@ -1,4 +1,4 @@
-package consoleLibrary;
+package ConsoleLibrary;
 
 public enum Color
 {

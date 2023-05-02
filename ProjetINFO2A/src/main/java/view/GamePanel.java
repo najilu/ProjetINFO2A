@@ -1,8 +1,8 @@
 package view;
 
-import consoleLibrary.ColoredChar;
-import consoleLibrary.Draw;
-import consoleLibrary.KeyListenerConsole;
+import ConsoleLibrary.ColoredChar;
+import ConsoleLibrary.Draw;
+import ConsoleLibrary.KeyListenerConsole;
 import controller.RuntimeController;
 import model.Movable.EntityMovable;
 import org.jline.terminal.Terminal;
@@ -10,7 +10,6 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
 import settings.Setting;
 import java.io.IOException;
-import java.util.*;
 
 public class GamePanel implements IViewable
 {
@@ -86,7 +85,7 @@ public class GamePanel implements IViewable
         colMax = runtimeController.getMap().getColMax();
         terminal.puts(InfoCmp.Capability.cursor_invisible);
 
-        draw.drawMap(this, runtimeController.getMap(), RuntimeController.settings.get(5).getBooleanValue());
+        draw.drawMap(this, runtimeController.getMap());
     }
 
     public void showWin(){
@@ -142,6 +141,40 @@ public class GamePanel implements IViewable
         for(Setting setting : settings){
             terminal.writer().println(setting);
         }
+        terminal.puts(InfoCmp.Capability.cursor_invisible);
+    }
+
+    public void showSkills(Setting[] settings, int points){
+        Draw.clear();
+        terminal.writer().print("""
+
+                   _____ _  ___ _ _        \s
+                  / ____| |/ (_) | |      _\s
+                 | (___ | ' / _| | |___  (_)
+                  \\___ \\|  < | | | / __|   \s
+                  ____) | . \\| | | \\__ \\  _\s
+                 |_____/|_|\\_\\_|_|_|___/ (_)
+                                           \s
+                                           \s
+                ___________________________________                          
+                """);
+
+        terminal.writer().println();
+        terminal.writer().println();
+
+        String icon = "";
+        for(Setting setting : settings){
+            switch (setting.getName()){
+                case "Force" -> icon = "\uD83E\uDDBE";
+                case "Agilité" -> icon = "\uD83C\uDF2A";
+                case "Résistance" -> icon = "❤";
+                case "Chance" -> icon = "\uD83C\uDF40";
+                case "Précision" -> icon = "\uD83C\uDFF9";
+            }
+            terminal.writer().println(icon+" " +setting);
+        }
+        terminal.writer().println();
+        terminal.writer().print("il vous reste " + points);
         terminal.puts(InfoCmp.Capability.cursor_invisible);
     }
 }

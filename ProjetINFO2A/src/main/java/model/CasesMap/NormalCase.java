@@ -1,6 +1,6 @@
 package model.CasesMap;
 
-import consoleLibrary.ConsoleSprite;
+import ConsoleLibrary.ConsoleSprite;
 import model.Sprite3D;
 
 public class NormalCase extends SpritableEntity

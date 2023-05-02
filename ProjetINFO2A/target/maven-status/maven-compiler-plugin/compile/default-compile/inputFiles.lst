@@ -5,6 +5,7 @@ C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\ma
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\consoleLibrary\ColoredChar.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Field.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\settings\Setting.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\settings\Skills.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\CasesMap\TeleportationCase.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\controller\SubStoneController.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\consoleLibrary\Draw.java
@@ -17,10 +18,12 @@ C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\ma
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\InputManager.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\consoleLibrary\ConsoleSprites.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\consoleLibrary\KeyListenerConsole.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\settings\Randomized.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Movable\EntityMovable.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Movable\Cursor.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\controller\SubMenuController.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\view\GamePanel.java
+C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\controller\SkillController.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\Movable\Player.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\PoissonSampling\Point.java
 C:\Users\Julian\Documents\L1 Info\INFO2A\Maxime\ProjetINFO2A\ProjetINFO2A\src\main\java\model\CasesMap\NormalCase.java

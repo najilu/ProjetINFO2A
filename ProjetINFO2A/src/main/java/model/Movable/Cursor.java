@@ -1,6 +1,6 @@
 package model.Movable;
 
-import consoleLibrary.ConsoleSprite;
+import ConsoleLibrary.ConsoleSprite;
 import model.Sprite3D;
 
 public class Cursor extends EntityMovable

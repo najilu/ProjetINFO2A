@@ -1,9 +1,9 @@
 package model.Movable;
 
-import consoleLibrary.ConsoleSprite;
+import ConsoleLibrary.ConsoleSprite;
 import model.CasesMap.TeleportationCase;
-import model.Movable.EntityMovable;
 import model.Sprite3D;
+import settings.Skills;
 
 public class Player extends EntityMovable
 {
@@ -12,6 +12,7 @@ public class Player extends EntityMovable
     private boolean win;
     private boolean teleported;
     private boolean stoneLaunched;
+    private Skills skills;
 
     private TeleportationCase currentTeleportation;
 
@@ -65,16 +66,26 @@ public class Player extends EntityMovable
         this.stones = stones;
     }
 
+    public Skills getSkills()
+    {
+        return skills;
+    }
 
-    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, Sprite3D sprite3D , int speed, int stones) {
+    public void setSkills(Skills skills)
+    {
+        this.skills = skills;
+    }
+
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, Sprite3D sprite3D , int speed, int stones, Skills skills) {
         super(sprite3D, consoleSprite, x, y, speed);
         this.HP = HP;
         this.stones = stones;
         setWin(false);
+        this.skills = skills;
     }
 
 
-    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, int speed, int stones) {
-        this(x, y, HP, consoleSprite, new Sprite3D(), speed, stones);
+    public Player(int x, int y, int HP, ConsoleSprite consoleSprite, int speed, int stones, Skills skills) {
+        this(x, y, HP, consoleSprite, new Sprite3D(), speed, stones, skills);
     }
 }

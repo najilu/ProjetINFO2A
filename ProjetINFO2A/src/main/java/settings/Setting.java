@@ -66,6 +66,9 @@ public class Setting {
     public String getValue(){
         return value;
     }
+    public void setValue(String value){
+        this.value =value;
+    }
 
     public void changeValue(boolean next){
         int direction = (next) ? 1 : -1;
@@ -83,6 +86,9 @@ public class Setting {
 
     public void setFocus(boolean value){
         focus = value;
+    }
+    public String getName(){
+        return name;
     }
 
     @Override

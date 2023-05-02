@@ -75,7 +75,7 @@ public class SubStoneController implements IController{
                 }
             }
             case Randomisation -> {
-                nextStep();//maxime qui devrait l'inserer
+                nextStep();
             }
             case Hit -> {
                 runtimeController.getPlayer().setStones(runtimeController.getPlayer().getStones() -1);

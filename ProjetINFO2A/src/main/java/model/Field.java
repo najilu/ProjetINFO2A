@@ -2,7 +2,7 @@ package model;
 
 import PoissonSampling.Point;
 import PoissonSampling.PoissonAlgorithm;
-import consoleLibrary.ConsoleSprites;
+import ConsoleLibrary.ConsoleSprites;
 import model.CasesMap.*;
 import model.Movable.Player;
 
@@ -35,7 +35,7 @@ public class Field
         int rowCaseWinnable = random.nextInt(-1, rowMax-1);
         Point[][] pointsMap = new Point[getColMax()][getRowMax()];
         PoissonAlgorithm poissonAlgorithm = new PoissonAlgorithm(getColMax(), getRowMax(), pointsMap);
-        poissonAlgorithm.generatePoints('b', 3.0);
+        poissonAlgorithm.generatePoints('b', 3.0+player.getSkills().getLuck());
         poissonAlgorithm.generatePoints('t', 8.0);
         poissonAlgorithm.generatePoints('o', 2.5);
         poissonAlgorithm.generatePoints('s', 3.0);

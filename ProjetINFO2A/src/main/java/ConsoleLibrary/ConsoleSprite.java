@@ -1,7 +1,4 @@
-package consoleLibrary;
-
-import consoleLibrary.Color;
-import consoleLibrary.ColoredChar;
+package ConsoleLibrary;
 
 public class ConsoleSprite
 {

@@ -1,13 +1,12 @@
 package model.Movable;
 
-import consoleLibrary.ConsoleSprite;
+import ConsoleLibrary.ConsoleSprite;
 import model.CasesMap.SpritableEntity;
 import model.Sprite3D;
 
 public class EntityMovable extends SpritableEntity
 {
     private int oldX;
-
     private int oldY;
     private int x;
     private int y;

@@ -6,7 +6,7 @@ public class PoissonAlgorithm {
     private final int k = 8; // nombre de tentatives pour trouver un nouveau point
 
     private final double cellSize = 1.0;
-    private final int gridSize;
+    //private final int gridSize;
     private final int width, height;
     private final List<Point> points = new ArrayList<>();
     private final List<Point> activeList = new ArrayList<>();
@@ -16,7 +16,7 @@ public class PoissonAlgorithm {
         this.width = width;
         this.height = height;
         this.grid = map;
-        this.gridSize = (int) Math.ceil(Math.max(width, height) / cellSize);
+        //this.gridSize = (int) Math.ceil(Math.max(width, height) / cellSize);
     }
 
     public void generatePoints(char type, double r) { // distance minimale entre deux points
@@ -60,10 +60,10 @@ public class PoissonAlgorithm {
         int cellY = getIndex(point.y());
         int startX = Math.max(0, cellX - 5);
         int startY = Math.max(0, cellY - 5);
-        int endX = Math.min(gridSize - 1, cellX + 5);
-        int endY = Math.min(gridSize - 1, cellY + 5);
-        for (int x = startX; x <= endX; x++) {
-            for (int y = startY; y <= endY; y++) {
+        int endX = Math.min(this.width - 1, cellX + 5);
+        int endY = Math.min(this.height - 1, cellY + 5);
+        for (int x = startX; x < endX; x++) {
+            for (int y = startY; y < endY; y++) {
                 Point p = grid[x][y];
                 if (p != null && p.distanceTo(point) < r  && p.type() == point.type()) {// si le point n'est pas nul il ya des chances qu'on dise vraie
                     return false;

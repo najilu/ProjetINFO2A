@@ -1,12 +1,9 @@
 package view;
 
-import consoleLibrary.ColoredChar;
+import ConsoleLibrary.ColoredChar;
 import controller.RuntimeController;
 import model.Movable.EntityMovable;
 import settings.Setting;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public interface IViewable
 {
@@ -28,4 +25,5 @@ public interface IViewable
     public void showLose();
 
     public void showMenu(Setting[] settings);
+    public void showSkills(Setting[] settings, int points);
 }

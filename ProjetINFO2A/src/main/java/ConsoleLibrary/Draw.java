@@ -1,4 +1,4 @@
-package consoleLibrary;
+package ConsoleLibrary;
 
 import model.*;
 import org.fusesource.jansi.Ansi;
@@ -13,7 +13,7 @@ public class Draw {
         this.terminal = terminal;
     }
 
-    public void drawAt(int x, int y, ColoredChar coloredChar){
+    public void drawAt(int x, int y, ColoredChar coloredChar){ // a revoir
         terminal.puts(InfoCmp.Capability.cursor_address,0,0);
         terminal.writer().print(Ansi.ansi().bgGreen());
         terminal.puts(InfoCmp.Capability.cursor_address,y,x*2); //changer la couleur en fonction de la case
@@ -28,7 +28,7 @@ public class Draw {
         terminal.writer().print(Color.RED+message);
     }
 
-    public void drawMap(GamePanel gamePanel, Field field, boolean wallHack){
+    public void drawMap(GamePanel gamePanel, Field field){
         clear();
         terminal.puts(InfoCmp.Capability.cursor_address, 0, 0);
         for (int rowIndex = 0; rowIndex<gamePanel.getRowMax(); rowIndex++){
@@ -37,10 +37,6 @@ public class Draw {
             }
             terminal.writer().println();
         }
-    }
-
-    public void cleanAt(int x, int y){
-        drawAt(x,y,new ColoredChar(BLOCK, Color.GREEN));
     }
 
     public void showASCII(String text){

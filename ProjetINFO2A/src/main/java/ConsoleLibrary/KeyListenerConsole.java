@@ -1,4 +1,4 @@
-package consoleLibrary;
+package ConsoleLibrary;
 
 import org.jline.terminal.Terminal;
 
@@ -10,8 +10,6 @@ public class KeyListenerConsole {
     public KeyListenerConsole(Terminal terminal) {
         this.terminal = terminal;
     }
-
-    //faire un nouveau thread
 
     public char listenInput(){
         terminal.enterRawMode();
